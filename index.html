@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>I'm Sorry My Jaana ❤️ | Love & Memories</title>
+    <!-- Tailwind CSS v3 + Google Fonts + Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .handwriting {
+            font-family: "Playfair Display", serif;
+        }
+
+        .floating-heart {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(5deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+        }
+
+        .bg-romantic {
+            background: linear-gradient(135deg, #fef6e4 0%, #ffe9e3 100%);
+        }
+
+        /* falling flower animation */
+        .falling-flower {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            font-size: 2rem;
+            animation: fallLinear 3s ease-in forwards;
+        }
+
+        @keyframes fallLinear {
+            0% {
+                transform: translateY(-20vh) rotate(0deg);
+                opacity: 1;
+            }
+
+            80% {
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .modal-card {
+            background: white;
+            max-width: 90%;
+            width: 400px;
+            border-radius: 2rem;
+            padding: 1.8rem;
+            text-align: center;
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
+            animation: scaleUp 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+            border: 1px solid #ffe0e0;
+        }
+
+        @keyframes scaleUp {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+            transition: all 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128c7e;
+            transform: scale(1.02);
+        }
+
+        /* love calculator counter animation */
+        .counter-number {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f43f5e, #fb923c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: all 0.1s ease;
+        }
+
+        .love-progress {
+            transition: width 0.05s linear;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(244, 63, 94, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+            }
+        }
+
+        .calculate-btn-pulse {
+            animation: pulse-glow 1.5s infinite;
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2);
+            aspect-ratio: 4 / 5;
+            min-height: 400px;
+            max-height: 600px;
+            max-width: 480px;
+            /* Width will be 4/5 of height */
+            margin: 0 auto;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .carousel-slide {
+            flex-shrink: 0;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #fff0ed, #ffe4dc);
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-height: 700px;
+            display: block;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn-left {
+            left: 12px;
+        }
+
+        .carousel-btn-right {
+            right: 12px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d4a5a5;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dot.active {
+            background: #f43f5e;
+            width: 24px;
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #ffe4dc;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #f9ac9c;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-romantic antialiased overflow-x-hidden">
+    <div class="relative min-h-screen w-full px-4 py-8 md:py-12 flex flex-col items-center justify-center">
+        <!-- floating hearts background -->
+        <div class="fixed inset-0 pointer-events-none overflow-hidden opacity-20 z-0">
+            <i class="fas fa-heart text-6xl text-rose-300 absolute top-10 left-[5%] floating-heart"
+                style="animation-delay: 0s"></i>
+            <i class="fas fa-heart text-4xl text-pink-300 absolute bottom-20 right-[8%] floating-heart"
+                style="animation-delay: 1.2s"></i>
+            <i class="fas fa-heart text-5xl text-red-300 absolute top-[30%] right-[12%] floating-heart"
+                style="animation-delay: 2s"></i>
+            <i class="fas fa-heart text-3xl text-rose-200 absolute bottom-[15%] left-[15%] floating-heart"
+                style="animation-delay: 0.7s"></i>
+            <i class="fas fa-heart text-7xl text-pink-200 absolute top-[70%] left-[80%] floating-heart"
+                style="animation-delay: 1.5s"></i>
+        </div>
+
+        <div class="relative z-10 max-w-3xl w-full mx-auto">
+            <!-- header -->
+            <div class="text-center mb-6 md:mb-10">
+                <div
+                    class="inline-flex items-center justify-center bg-white/60 backdrop-blur-sm rounded-full p-3 shadow-sm mb-4">
+                    <i class="fas fa-heart-broken text-rose-500 text-3xl md:text-4xl"></i>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold text-rose-800 handwriting tracking-wide">
+                    I'm Truly Sorry Jaana❤️
+                </h1>
+                <div class="h-1 w-24 bg-gradient-to-r from-rose-300 to-amber-300 mx-auto rounded-full mt-3 mb-2"></div>
+                <p class="text-gray-600 text-base md:text-lg mt-4 max-w-lg mx-auto italic">
+                    Every word from the deepest part of my heart for you, my Jaana.
+                </p>
+            </div>
+
+            <!-- NEW CAROUSEL SECTION - our beautiful memories (continuous auto-slide) -->
+            <div class="mb-10">
+                <div class="text-center mb-3">
+                    <h2 class="text-xl font-bold text-rose-700 flex items-center justify-center gap-2">
+                        <i class="fas fa-images text-rose-500"></i> Eid Ul Adha 2026 Memories
+                        💑
+                    </h2>
+                    <p class="text-gray-500 text-sm">
+                        Best moment with Jaana ❤️
+                    </p>
+                </div>
+                <div class="carousel-container relative bg-white/50 backdrop-blur-sm border border-rose-200">
+                    <div class="carousel-track" id="carouselTrack">
+                        <!-- Images will be dynamically inserted via JS from ./images folder -->
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <div class="carousel-btn carousel-btn-left" id="prevBtn">
+                        <i class="fas fa-chevron-left text-rose-500 text-lg"></i>
+                    </div>
+                    <div class="carousel-btn carousel-btn-right" id="nextBtn">
+                        <i class="fas fa-chevron-right text-rose-500 text-lg"></i>
+                    </div>
+                </div>
+                <div class="carousel-dots" id="carouselDots"></div>
+                <p class="text-center text-xs text-gray-400 mt-2">
+                    <i class="fas fa-play-circle text-rose-400"></i> Our 2026 Bakra Eid Memories 💕
+                </p>
+            </div>
+
+            <!-- apology letter card -->
+            <div
+                class="bg-[url('./images/bg-small.jpeg')] md:bg-[url('./images/bg-big.jpeg')] bg-cover bg-center opacity-80 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-10 border border-white/60 transition-all duration-300">
+                <div class="flex flex-col items-center md:items-start gap-3">
+                    <i class="fas fa-quote-left text-3xl text-rose-400 opacity-60"></i>
+                    <p class="text-white text-lg md:text-xl leading-relaxed font-medium text-center md:text-left">
+                        Meri Jaan,
+                        <span id="fianceName" class="font-semibold text-rose-600">Jaana❤️</span>,
+                    </p>
+                    <p class="text-white text-base md:text-lg leading-relaxed mt-2">
+                        I've been replaying everything in my mind, and I realize how much
+                        I hurt you. There are no perfect words, but i Know app muj se sakth wala naraz hoo.... jo ke app
+                        ka banta bhi ha
+                        mai hoo hi itna ganda bacha...app ka kahna nhii manta...app ko tang krta rahta hoo....un
+                        expected rahta ho
+                    </p>
+                    <div class="w-full my-3 flex justify-center">
+                        <div class="h-px w-3/4 bg-gradient-to-r from-transparent via-rose-300 to-transparent"></div>
+                    </div>
+                    <p class="text-white text-base md:text-lg leading-relaxed">
+                        But ek cheez ha....voh ya ke mai app se Pyaar bohht zyada krta hoo Jaana...App chup hoo muj se
+                        baat nhii krr rahi app ki ya kahmoshi muje bohht chub rahi ha jaana.
+                        ArSlan Love you Soo Much❤️. You are entire World for me😘. You are the Love of my Life, Garden
+                        of my Hapiness and Home of Pure and endless Love❤️
+                    </p>
+                    <div class="mt-5 w-full flex justify-end">
+                        <div class="text-right">
+                            <p class="font-handwriting text-rose-700 text-xl">
+                                Your Forever,
+                            </p>
+                            <p class="font-semibold text-white text-lg">
+                                ArSlan 🤍
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- reasons card -->
+            <div class="mt-8 bg-white/70 rounded-xl p-5 shadow-md backdrop-blur-sm border border-rose-100">
+                <h2 class="text-xl font-bold text-rose-700 flex items-center gap-2">
+                    <i class="fas fa-pen-fancy text-rose-500"></i> Why I'm Sorry Jaana
+                </h2>
+                <ul class="mt-4 space-y-3 text-gray-700">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-comment-slash text-rose-400 mt-1"></i><span>Mane Jaana❤️...App ke Msg ka
+                            jawab nhi dia.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-clock text-rose-400 mt-1"></i><span>Mai raat ko jaldi soo gia.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-heart-crack text-rose-400 mt-1"></i><span>Mane app ko actively time nahi
+                            diya.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-hand-holding-heart text-rose-400 mt-1"></i><span>Mane Apni Jaana❤️ ki baat
+                            kamaan nhi raha app ke kahne ke bajawood bhi.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- MODIFIED BUTTON SECTION -->
+            <div class="mt-8 bg-white/70 rounded-xl p-5 shadow-md backdrop-blur-sm border border-rose-100">
+                <div class="mt-2 pt-2 border-t border-dashed border-rose-200">
+
+                    <h2 class="text-xl font-bold text-rose-700 flex items-center gap-2"><i class="fas fa-gift"></i> Can
+                        you Forgive Me😢</h2>
+                    <div class="mt-3 space-y-4">
+                        <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                            <span
+                                class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm flex items-center gap-1"><i
+                                    class="fas fa-check-circle text-rose-500 text-xs"></i> More patience</span>
+                            <span
+                                class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm flex items-center gap-1"><i
+                                    class="fas fa-check-circle text-rose-500 text-xs"></i> Weekly date nights</span>
+                            <span
+                                class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm flex items-center gap-1"><i
+                                    class="fas fa-check-circle text-rose-500 text-xs"></i> Active listening</span>
+                            <span
+                                class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm flex items-center gap-1"><i
+                                    class="fas fa-check-circle text-rose-500 text-xs"></i> Surprise love notes</span>
+                        </div>
+
+
+                        <div
+                            class="text-sm text-center text-gray-600 mb-2 flex-col justify-center items-center gap-1 flex-wrap">
+                            <span class="text-7xl p-6">😘</span>
+                            <p class="font-bold text-rose-700 text-xl p-6">
+                                Jaana❤️ ... Agar ap ne muje maaf krr dia toh .... (Click any of
+                                these)
+                            </p>
+                        </div>
+                        <div class="flex justify-center items-center gap-4 flex-wrap">
+                            <button id="forgiveBtn"
+                                class="bg-gradient-to-r from-rose-400 to-rose-500 hover:from-rose-500 hover:to-rose-600 text-white font-semibold py-2 px-6 rounded-full shadow transition flex items-center gap-2">
+                                <i class="fas fa-heart"></i> I Forgive You
+                            </button>
+                            <button id="loveBtn"
+                                class="bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-semibold py-2 px-6 rounded-full shadow transition flex items-center gap-2">
+                                <i class="fas fa-heartbeat"></i> I Love You
+                            </button>
+                            <button id="flowerBtn"
+                                class="bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-500 hover:to-orange-500 text-white font-semibold py-2 px-6 rounded-full shadow transition flex items-center gap-2">
+                                <i class="fas fa-rose"></i> Flower for my Jaana❤️
+                            </button>
+                        </div>
+                        <div id="feedbackMessage"
+                            class="mt-4 text-center text-sm md:text-base font-medium text-gray-700 bg-white/50 p-2 rounded-lg transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOVE CALCULATOR SECTION -->
+                <div
+                    class="mt-10 bg-gradient-to-br from-white/80 to-pink-50/80 rounded-2xl p-6 backdrop-blur-sm shadow-xl border border-rose-200 transition-all duration-300 hover:shadow-rose-200/40">
+                    <div class="text-center">
+                        <div class="inline-flex items-center justify-center bg-rose-100 rounded-full p-3 mb-3">
+                            <i class="fas fa-calculator text-2xl text-rose-500"></i>
+                        </div>
+                        <h2
+                            class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-amber-600 handwriting">
+                            💖 Love Calculator 💖
+                        </h2>
+                        <p class="text-gray-600 text-sm mt-1">
+                            Check how much ArSlan love you, my Love ❤️
+                        </p>
+                    </div>
+
+                    <div class="mt-6 flex flex-col items-center justify-center gap-5">
+                        <div
+                            class="bg-white/60 rounded-2xl px-8 py-5 shadow-inner w-full text-center border border-rose-100">
+                            <div id="lovePercentageDisplay" class="counter-number text-6xl md:text-7xl font-extrabold">
+                                out of 100%
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-4 mt-3 overflow-hidden">
+                                <div id="loveProgressBar"
+                                    class="love-progress bg-gradient-to-r from-rose-500 to-orange-400 h-4 rounded-full"
+                                    style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <button id="calculateLoveBtn"
+                            class="calculate-btn-pulse bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-3 text-lg">
+                            <i class="fas fa-heartbeat fa-fw"></i> Check How Much ArSlan Loves You
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+
+                        <div class="text-xs text-gray-400 flex items-center gap-1 mt-2">
+                            <i class="fas fa-infinity"></i> My love for you is infinite
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personalized name section -->
+                <div class="mt-10 w-full bg-white/60 rounded-xl p-5 backdrop-blur-sm">
+                    <h3 class="text-center text-md font-semibold text-rose-700">
+                        <i class="fas fa-feather-alt"></i> Enter Your Name Here,
+                    </h3>
+                    <div class="flex flex-col sm:flex-row gap-3 mt-3 items-center">
+                        <input type="text" id="nameInput" placeholder="Type your name, my love 💕"
+                            class="flex-1 bg-white border border-rose-200 rounded-full px-5 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-rose-300 shadow-sm" />
+                        <button id="setNameBtn"
+                            class="bg-rose-500 hover:bg-rose-600 text-white px-6 py-2 rounded-full transition shadow flex items-center gap-2">
+                            <i class="fas fa-pen"></i> Love Note
+                        </button>
+                    </div>
+                    <p id="personalizedNote" class="text-gray-600 mt-4 text-center text-sm italic">
+                        Enter your name and feel the love, Jaana❤️
+                    </p>
+                </div>
+
+                <div class="mt-12 text-center">
+                    <div class="inline-block bg-white p-4 rounded-2xl shadow-lg border border-rose-200">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-ring text-2xl text-amber-500"></i>
+                            <span class="text-gray-700 font-medium">You are my forever, Jaana❤️. I'm sorry and I love
+                                you
+                                endlessly.</span>
+                            <i class="fas fa-heart text-rose-500 animate-pulse"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-6">
+                        Made with teary eyes & a hopeful heart • I love you Jaana❤️
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // ========================
+            // CAROUSEL IMPLEMENTATION - continuous auto-slide with images from ./images folder
+            // ========================
+            // Define image filenames (you can add more files to your images folder, just update this array)
+            // It will automatically load: 1.jpg, 2.jpg, ... or you can specify exact names.
+            // To be flexible: we'll try to load common names. But since you have images folder,
+            // we'll attempt to load image1.jpg, image2.png, or you can rename your files.
+            // For simplicity and reliability, we'll use a standard naming: "1.jpg", "2.jpg" etc.
+            // But you can place your two photos as "photo1.jpg" and "photo2.jpg" in ./images/
+            // The script will scan for these names. I'll make it dynamic: if images exist, they'll show.
+            // For demo, I'll predefine an array with your actual file names (you can modify)
+            // Since you have two photos in ./images folder, we'll name them "memory1.jpg" and "memory2.jpg" but you can rename.
+            // To make it work out-of-the-box: just ensure your images are inside "images" folder.
+            // I'll build the carousel with fallback messages but will try to load the images.
+
+            let imageList = ["./Images/p1.jpeg", "./Images/p2.jpeg", "./Images/p3.jpeg", "./Images/p4.jpeg", "./Images/p5.jpeg", "./Images/p6.jpeg", "./Images/p7.jpeg", "./Images/p8.jpeg", "./Images/p9.jpeg", "./Images/p10.jpeg", "./Images/p11.jpeg", "./Images/p12.jpeg", "./Images/p13.jpeg"];
+
+            // But to be more robust: also try alternative common names. We'll also allow user to add more by editing array.
+            // We'll check if images load, if not show placeholder but still carousel works.
+            // For your actual usage: rename your two photos to "photo1.jpg" and "photo2.jpg" inside ./images folder.
+            // If they have other names, please replace the array above accordingly. Example:
+            // imageList = ["./images/ourlove1.png", "./images/ourlove2.jpeg"];
+
+            let carouselImages = ["./Images/p1.jpeg", "./Images/p2.jpeg", "./Images/p3.jpeg", "./Images/p4.jpeg", "./Images/p5.jpeg", "./Images/p6.jpeg", "./Images/p7.jpeg", "./Images/p8.jpeg", "./Images/p9.jpeg", "./Images/p10.jpeg", "./Images/p11.jpeg", "./Images/p12.jpeg", "./Images/p13.jpeg"];
+            // Ensure we have at least default if no images loaded; but we'll try to load actual images.
+            // We'll pre-define actual images from folder: I'll keep them as you mentioned two photos.
+            // Let's set explicit array with common names that you might have.
+            // For user convenience: detect if images exist, else show placeholder but maintain carousel movement.
+            // I'll create a function to attempt loading and if error, we show a nice romantic placeholder.
+
+            const fallbackPlaceholder =
+                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='700' fill='%23ffe4e1'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='%23f43f5e' text-anchor='middle' dy='.3em'%3E❤️ Our Memory ❤️%3C/text%3E%3C/svg%3E";
+
+            // Try to use user images: we'll push exactly what you have in images folder.
+            // Please ensure your two images are named: "1.jpg" and "2.jpg" OR edit this array.
+            // Let's set using standard naming: "1.jpg", "2.jpg" - You can rename your files accordingly.
+            const userImages = ["./Images/p1.jpeg", "./Images/p2.jpeg", "./Images/p3.jpeg", "./Images/p4.jpeg", "./Images/p5.jpeg", "./Images/p6.jpeg", "./Images/p7.jpeg", "./Images/p8.jpeg", "./Images/p9.jpeg", "./Images/p10.jpeg", "./Images/p11.jpeg", "./Images/p12.jpeg", "./Images/p13.jpeg"];
+            // Alternative additional attempt with .png
+            const alternativeNames = [
+                "./images/photo1.jpg",
+                "./images/photo2.jpg",
+                "./images/img1.jpg",
+                "./images/img2.jpg",
+            ];
+
+            let finalImageUrls = [];
+
+            function loadCarouselImages() {
+                // try to use userImages first, then test if they load via image onerror but we'll just trust user setup.
+                // Simply use provided list, we'll prefill finalImageUrls with valid strings.
+                // The user can edit this array directly in browser console if needed. But we'll go with ./images/1.jpg and ./images/2.jpg.
+                // I'll also show a friendly note. Let's set default to these.
+                finalImageUrls = ["./Images/p1.jpeg", "./Images/p2.jpeg", "./Images/p3.jpeg", "./Images/p4.jpeg", "./Images/p5.jpeg", "./Images/p6.jpeg", "./Images/p7.jpeg", "./Images/p8.jpeg", "./Images/p9.jpeg", "./Images/p10.jpeg", "./Images/p11.jpeg", "./Images/p12.jpeg", "./Images/p13.jpeg"];
+                // If you have different names, please replace these two lines with your exact filenames.
+                // For example: finalImageUrls = ["./images/ourfirst.jpg", "./images/oursecond.png"];
+                return finalImageUrls;
+            }
+
+            loadCarouselImages();
+
+            // Carousel variables
+            let currentIndex = 0;
+            let autoInterval;
+            const track = document.getElementById("carouselTrack");
+            const prevBtn = document.getElementById("prevBtn");
+            const nextBtn = document.getElementById("nextBtn");
+            const dotsContainer = document.getElementById("carouselDots");
+            let slideWidth = 0;
+            let totalSlides = finalImageUrls.length;
+
+            function buildCarousel() {
+                if (!track) return;
+                track.innerHTML = "";
+                finalImageUrls.forEach((src, idx) => {
+                    const slide = document.createElement("div");
+                    slide.className = "carousel-slide";
+                    const img = document.createElement("img");
+                    img.src = src;
+                    img.alt = `Memory ${idx + 1} with my Jaana`;
+                    img.onerror = function () {
+                        // if image fails to load, replace with romantic placeholder
+                        this.src = fallbackPlaceholder;
+                        this.style.objectFit = "contain";
+                        this.style.padding = "20px";
+                    };
+                    slide.appendChild(img);
+                    track.appendChild(slide);
+                });
+                // if no slides? add placeholder
+                if (finalImageUrls.length === 0) {
+                    const slide = document.createElement("div");
+                    slide.className = "carousel-slide";
+                    slide.innerHTML = `<div class="flex flex-col items-center p-10 text-rose-500"><i class="fas fa-heart text-5xl mb-2"></i><p>Place your photos inside ./images/ as 1.jpg and 2.jpg 💕</p></div>`;
+                    track.appendChild(slide);
+                    totalSlides = 1;
+                } else {
+                    totalSlides = finalImageUrls.length;
+                }
+                updateCarousel();
+                createDots();
+                startAutoSlide();
+            }
+
+            function updateCarousel() {
+                if (!track) return;
+                const container = document.querySelector(".carousel-container");
+                if (container) {
+                    slideWidth = container.clientWidth;
+                    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+                }
+                updateDotsActive();
+            }
+
+            function createDots() {
+                if (!dotsContainer) return;
+                dotsContainer.innerHTML = "";
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement("div");
+                    dot.classList.add("dot");
+                    if (i === currentIndex) dot.classList.add("active");
+                    dot.addEventListener("click", () => {
+                        stopAutoSlide();
+                        currentIndex = i;
+                        updateCarousel();
+                        startAutoSlide();
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function updateDotsActive() {
+                const dots = document.querySelectorAll(".dot");
+                dots.forEach((dot, idx) => {
+                    if (idx === currentIndex) dot.classList.add("active");
+                    else dot.classList.remove("active");
+                });
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateCarousel();
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            }
+
+            function startAutoSlide() {
+                if (autoInterval) clearInterval(autoInterval);
+                autoInterval = setInterval(() => {
+                    nextSlide();
+                }, 3500); // continuous every 3.5 seconds
+            }
+
+            function stopAutoSlide() {
+                if (autoInterval) {
+                    clearInterval(autoInterval);
+                    autoInterval = null;
+                }
+            }
+
+            if (prevBtn && nextBtn) {
+                prevBtn.addEventListener("click", () => {
+                    stopAutoSlide();
+                    prevSlide();
+                    startAutoSlide();
+                });
+                nextBtn.addEventListener("click", () => {
+                    stopAutoSlide();
+                    nextSlide();
+                    startAutoSlide();
+                });
+            }
+
+            window.addEventListener("resize", () => {
+                updateCarousel();
+            });
+
+            // Initialize carousel after DOM ready
+            buildCarousel();
+
+            // ---------- EXISTING LOVE CALCULATOR & OTHER LOGIC (from previous) ----------
+            const fianceNameSpan = document.getElementById("fianceName");
+            const nameInput = document.getElementById("nameInput");
+            const setNameBtn = document.getElementById("setNameBtn");
+            const personalizedNote = document.getElementById("personalizedNote");
+            const forgiveBtn = document.getElementById("forgiveBtn");
+            const loveBtn = document.getElementById("loveBtn");
+            const flowerBtn = document.getElementById("flowerBtn");
+            const calculateLoveBtn = document.getElementById("calculateLoveBtn");
+            const lovePercentageDisplay = document.getElementById(
+                "lovePercentageDisplay",
+            );
+            const loveProgressBar = document.getElementById("loveProgressBar");
+            const loveMessage = document.getElementById("loveMessage");
+
+            let currentName = "Jaana❤️";
+            fianceNameSpan.innerText = currentName;
+
+            let isAnimating = false;
+            function animateLoveMeter() {
+                if (isAnimating) return;
+                isAnimating = true;
+                const targetValue = Math.floor(Math.random() * (110 - 105 + 1) + 105);
+                let currentVal = 0;
+                const duration = 2000;
+                const stepTime = 20;
+                const steps = duration / stepTime;
+                let step = 0;
+                calculateLoveBtn.disabled = true;
+                calculateLoveBtn.style.opacity = "0.6";
+                calculateLoveBtn.classList.remove("calculate-btn-pulse");
+                calculateLoveBtn.innerHTML = `<i class="fas fa-spinner fa-pulse"></i> Measuring my love for you...`;
+                const interval = setInterval(() => {
+                    step++;
+                    const progress = step / steps;
+                    let eased = 1 - Math.pow(1 - progress, 3);
+                    let currentNumber = Math.floor(eased * targetValue);
+                    if (currentNumber > targetValue) currentNumber = targetValue;
+                    if (step >= steps) {
+                        currentNumber = targetValue;
+                        clearInterval(interval);
+                        lovePercentageDisplay.innerText = `${targetValue}%`;
+                        loveProgressBar.style.width = `${targetValue}%`;
+                        let finalMsg = "";
+                        if (targetValue === 110)
+                            finalMsg =
+                                "💖 INFINITE LOVE! 💖 My love for you is beyond the universe, Jaana! 110% means I love you more than anything possible! 😭❤️";
+                        else if (targetValue === 109)
+                            finalMsg =
+                                "💘 109% LOVE! You are my whole world, Jaana! There's no one else like you! 💕";
+                        else if (targetValue === 108)
+                            finalMsg =
+                                "💗 108% PURE LOVE! My heart beats only for you, today and forever, my Jaana! 💓";
+                        else if (targetValue === 107)
+                            finalMsg =
+                                "💖 107%! You are the most precious person in my life, and I'm sorry from the bottom of my heart. I love you! 💕";
+                        else if (targetValue === 106)
+                            finalMsg =
+                                "💞 106% DEEPLY IN LOVE! Jaana, you make my life complete. Forgive me and let me love you more! 💑";
+                        else
+                            finalMsg =
+                                "💝 105% LOVE! You are my everything, Jaana. This love meter proves my heart is yours completely! 💟";
+                        loveMessage.innerHTML = `<span class="font-semibold text-rose-600">✨ ${finalMsg} ✨</span>`;
+                        for (let i = 0; i < 15; i++) createCelebrationHeart();
+                        calculateLoveBtn.disabled = false;
+                        calculateLoveBtn.style.opacity = "1";
+                        calculateLoveBtn.classList.add("calculate-btn-pulse");
+                        calculateLoveBtn.innerHTML = `<i class="fas fa-heartbeat fa-fw"></i> Check How Much I Love You <i class="fas fa-arrow-right"></i>`;
+                        isAnimating = false;
+                    } else {
+                        lovePercentageDisplay.innerText = `${currentNumber}%`;
+                        loveProgressBar.style.width = `${currentNumber}%`;
+                        if (currentNumber < targetValue)
+                            loveMessage.innerHTML = `<span class="text-rose-400 animate-pulse">❤️ Calculating my infinite love for you... ❤️</span>`;
+                    }
+                }, stepTime);
+            }
+
+            function createCelebrationHeart() {
+                const heart = document.createElement("div");
+                heart.innerHTML = ["❤️", "💖", "💗", "💓", "💕", "💘", "🌹", "🌸"][
+                    Math.floor(Math.random() * 8)
+                ];
+                heart.classList.add("fixed", "text-2xl", "pointer-events-none", "z-50");
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.top = window.innerHeight - 50 + "px";
+                heart.style.position = "fixed";
+                heart.style.opacity = "0.9";
+                heart.style.transition = "all 1.5s ease-out";
+                heart.style.fontSize = Math.random() * 24 + 18 + "px";
+                document.body.appendChild(heart);
+                setTimeout(() => {
+                    heart.style.transform = `translateY(-400px) translateX(${(Math.random() - 0.5) * 150}px) rotate(15deg)`;
+                    heart.style.opacity = "0";
+                }, 10);
+                setTimeout(() => heart.remove(), 1600);
+            }
+
+            calculateLoveBtn.addEventListener("click", animateLoveMeter);
+
+            function showModalWithWhatsApp(
+                message,
+                whatsappAction,
+                customIcon = "❤️",
+            ) {
+                const existingModal = document.querySelector(".modal-overlay");
+                if (existingModal) existingModal.remove();
+                const modalDiv = document.createElement("div");
+                modalDiv.className = "modal-overlay";
+                modalDiv.innerHTML = `<div class="modal-card"><div class="text-4xl mb-3">${customIcon}</div><p class="text-gray-800 text-lg font-semibold mb-2">${message}</p><div class="h-px w-12 bg-rose-200 mx-auto my-3"></div><button id="whatsappRedirectBtn" class="btn-whatsapp w-full py-2 rounded-full flex items-center justify-center gap-2 font-medium mt-2"><i class="fab fa-whatsapp"></i> Open WhatsApp & Send ${whatsappAction}</button><button id="closeModalBtn" class="mt-3 text-gray-500 text-sm hover:text-gray-700 transition w-full">Close</button></div>`;
+                document.body.appendChild(modalDiv);
+                const closeModal = () => modalDiv.remove();
+                document
+                    .getElementById("closeModalBtn")
+                    .addEventListener("click", closeModal);
+                document
+                    .getElementById("whatsappRedirectBtn")
+                    .addEventListener("click", () => {
+                        let whatsappUrl =
+                            whatsappAction === "Miss You"
+                                ? "https://wa.me/?text=Jaana%20I%20forgive%20you%20ArSlan%20❤️%20Miss%20you%20loads!"
+                                : whatsappAction === "❤️"
+                                    ? "https://wa.me/?text=I%20Love%20You%20too%20sooo%20Much%20ArSlan%20❤️%20❤️"
+                                    : "https://wa.me/?text=Thank%20you%20for%20the%20flower%20my%20love%20🌹";
+                        window.open(whatsappUrl, "_blank");
+                        closeModal();
+                        showTempFloatingMessage(
+                            "Sent with love! Check WhatsApp, Jaana 💕",
+                            2500,
+                        );
+                    });
+            }
+
+            function startFlowerRainAndMessage() {
+                for (let i = 0; i < 28; i++)
+                    setTimeout(() => createFallingFlower(), i * 100);
+                const flowerModal = document.createElement("div");
+                flowerModal.className = "modal-overlay";
+                flowerModal.innerHTML = `<div class="modal-card text-center"><div class="text-5xl mb-2 animate-bounce">🌹🌼🌸</div><p class="text-rose-700 text-2xl font-bold handwriting">Flower for my Love!</p><p class="text-gray-600 mt-2">Jaana, these flowers are a symbol of my pure love and apology. You mean everything to me. 🌷💐</p><button id="closeFlowerModal" class="mt-4 bg-rose-500 text-white px-5 py-2 rounded-full hover:bg-rose-600 transition">Thank You Jaana ❤️</button></div>`;
+                document.body.appendChild(flowerModal);
+                document
+                    .getElementById("closeFlowerModal")
+                    .addEventListener("click", () => {
+                        flowerModal.remove();
+                        showTempFloatingMessage("You made my heart bloom, Jaana! 🌸", 2000);
+                    });
+                showTempFloatingMessage(
+                    "🌹🌷 Flowers raining for my beautiful Jaana! I love you 🌹🌷",
+                    4000,
+                );
+            }
+
+            function createFallingFlower() {
+                const flowerEmojis = ["🌸", "🌼", "🌻", "🌺", "🌸", "🌷", "🌹"];
+                const randomFlower =
+                    flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+                const flowerDiv = document.createElement("div");
+                flowerDiv.classList.add("falling-flower");
+                flowerDiv.innerText = randomFlower;
+                flowerDiv.style.left = Math.random() * 100 + "%";
+                flowerDiv.style.fontSize = Math.random() * 1.5 + 1.2 + "rem";
+                flowerDiv.style.animationDuration = Math.random() * 1.5 + 2 + "s";
+                document.body.appendChild(flowerDiv);
+                setTimeout(() => {
+                    if (flowerDiv && flowerDiv.remove) flowerDiv.remove();
+                }, 3500);
+            }
+
+            function showTempFloatingMessage(msg, duration = 2500) {
+                const feedbackDiv = document.getElementById("feedbackMessage");
+                if (!feedbackDiv) return;
+                feedbackDiv.innerHTML = `<span class="text-rose-600"><i class="fas fa-heart"></i> ${msg}</span>`;
+                setTimeout(() => {
+                    if (feedbackDiv.innerHTML.includes(msg)) feedbackDiv.innerHTML = "";
+                }, duration);
+            }
+
+            function createFloatingHeartEffect() {
+                for (let i = 0; i < 10; i++) {
+                    const heartSpan = document.createElement("div");
+                    heartSpan.innerHTML = "❤️";
+                    heartSpan.classList.add(
+                        "fixed",
+                        "text-2xl",
+                        "pointer-events-none",
+                        "z-50",
+                    );
+                    heartSpan.style.left = Math.random() * window.innerWidth + "px";
+                    heartSpan.style.top = "85%";
+                    heartSpan.style.position = "fixed";
+                    heartSpan.style.opacity = "0.9";
+                    heartSpan.style.transition = "all 1.2s ease-out";
+                    heartSpan.style.fontSize = Math.random() * 20 + 16 + "px";
+                    document.body.appendChild(heartSpan);
+                    setTimeout(() => {
+                        heartSpan.style.transform = `translateY(-300px) translateX(${(Math.random() - 0.5) * 80}px) scale(1.3)`;
+                        heartSpan.style.opacity = "0";
+                    }, 10);
+                    setTimeout(() => {
+                        heartSpan.remove();
+                    }, 1300);
+                }
+            }
+
+            forgiveBtn.addEventListener("click", () => {
+                showModalWithWhatsApp(
+                    "This is for Forgiving me Jaana 💖 ... please open WhatsApp and send a 'miss' to me 💕",
+                    "Miss You",
+                    "🤗💕",
+                );
+                createFloatingHeartEffect();
+            });
+            loveBtn.addEventListener("click", () => {
+                showModalWithWhatsApp(
+                    "I Love you too sooo Much Jaana! 💖 Please open WhatsApp and send me a ❤️",
+                    "❤️",
+                    "💖😘",
+                );
+                createFloatingHeartEffect();
+            });
+            flowerBtn.addEventListener("click", () => {
+                startFlowerRainAndMessage();
+                createFloatingHeartEffect();
+            });
+
+            function setFianceName() {
+                let newName = nameInput.value.trim();
+                if (newName !== "") {
+                    currentName = newName;
+                    fianceNameSpan.innerText = currentName;
+                    personalizedNote.innerHTML = `✨ ${currentName}, your name echoes in my heart like a beautiful prayer. I love you and I'm sorry. ✨`;
+                    nameInput.value = "";
+                    showTempFloatingMessage(
+                        `Thank you, ${currentName}. You mean the world to me.`,
+                        3000,
+                    );
+                } else
+                    personalizedNote.innerHTML =
+                        "💖 Jaana, please tell me your name so I can whisper it with my apology 💖";
+            }
+            setNameBtn.addEventListener("click", setFianceName);
+            nameInput.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") setFianceName();
+            });
+            window.addEventListener("load", () => {
+                personalizedNote.innerHTML =
+                    "💕 Jaana, type your name and let my apology be yours. I love you endlessly.";
+                setTimeout(() => {
+                    showTempFloatingMessage(
+                        "Jaana❤️, look at our memories sliding above 🥺💖",
+                        4000,
+                    );
+                }, 500);
+            });
+        </script>
+</body>
+
+</html>
